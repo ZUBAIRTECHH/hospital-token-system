@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hospital Token System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="logo" aria-hidden="true"></span>
+    <div>
+      <h1>City Care Hospital</h1>
+      <p>OPD token desk: emergencies are always seen first</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="board">
+    <div class="now">
+      <h2>Now serving</h2>
+      <div id="nowServing" class="token">None yet</div>
+      <div id="nowInfo" class="info">Press "Call next patient" to start.</div>
+      <div class="actions">
+        <button id="callBtn" class="primary">Call next patient</button>
+        <button id="undoBtn" class="ghost">Undo last action (<span id="undoCount">0</span>)</button>
+      </div>
+      <p id="toast" class="toast" role="status"></p>
+    </div>
+    <div class="stats">
+      <div><b id="sServed">0</b><span>Served</span></div>
+      <div><b id="sWaiting">0</b><span>Waiting</span></div>
+      <div><b id="sAvg">0s</b><span>Average wait</span></div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <section class="panel register">
+      <h2>Register patient</h2>
+      <form id="form">
+        <label>Name <input id="name" required maxlength="30" placeholder="Patient name"></label>
+        <label>Age <input id="age" type="number" min="0" max="120" required placeholder="Years"></label>
+        <label>Problem <input id="problem" required maxlength="40" placeholder="e.g. fever, chest pain"></label>
+        <fieldset>
+          <legend>Category</legend>
+          <div class="seg">
+            <input type="radio" name="cat" id="catN" value="Normal" checked><label for="catN" class="n">Normal</label>
+            <input type="radio" name="cat" id="catS" value="Senior"><label for="catS" class="s">Senior</label>
+            <input type="radio" name="cat" id="catE" value="Emergency"><label for="catE" class="e">Emergency</label>
+          </div>
+        </fieldset>
+        <button class="primary wide">Generate token</button>
+      </form>
+    </section>
+
+    <section class="queues">
+      <div class="col emergency"><h2><span class="dot"></span>Emergency <small id="cE">0</small></h2><ul id="qEmergency"></ul></div>
+      <div class="col senior"><h2><span class="dot"></span>Senior citizen <small id="cS">0</small></h2><ul id="qSenior"></ul></div>
+      <div class="col normal"><h2><span class="dot"></span>Normal <small id="cN">0</small></h2><ul id="qNormal"></ul></div>
+    </section>
+  </div>
+</main>
+
+<script src="ds/queue.js"></script>
+<script src="ds/priorityQueue.js"></script>
+<script src="ds/stack.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
